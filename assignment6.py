@@ -21,4 +21,13 @@ def generate_baskets_matrix(n=100):
                 baskets_matrix[bucket_i - 1, item_i - 1] = 1
     return baskets_matrix
 
-print generate_baskets_matrix(100)
+# Part a
+def freq_items(s_threshold = 5):
+    # Generates the basket matrix
+    baskets = generate_baskets_matrix(100)
+    # Sums down the columns to get the count of each item in baskets
+    summed_baskets = baskets.sum(axis=0)
+    # Return the number of baskets over the threshold
+    return sum(summed_baskets >= s_threshold)
+
+print freq_items()
