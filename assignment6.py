@@ -30,4 +30,13 @@ def freq_items(s_threshold = 5):
     # Return the number of baskets over the threshold
     return sum(summed_baskets >= s_threshold)
 
+# Part c
+def sum_bucket_size():
+    baskets = generate_baskets_matrix(100)
+    # Sum the rows to get the size of each bucket
+    basket_sizes = baskets.sum(axis=1)
+    # Sum the sums to get total size
+    return int(basket_sizes.sum())
+
 print freq_items()
+print sum_bucket_size()
