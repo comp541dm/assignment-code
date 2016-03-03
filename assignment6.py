@@ -1,4 +1,5 @@
 import numpy as np
+import itertools as it
 
 # Problem 6.1.1
 def generate_baskets(n=100):
@@ -30,6 +31,25 @@ def freq_items(s_threshold = 5):
     # Return the number of baskets over the threshold
     return sum(summed_baskets >= s_threshold)
 
+# Part b
+#
+# Brute force method
+def freq_pairs(s_threshold = 5):
+    n = 100
+    baskets = generate_baskets_matrix(n)
+    # Generate pairs of combinations
+    results = []
+    total_count = 0
+    for i,j in it.combinations(xrange(n), 2):
+        count = 0
+        for k in range(n):
+            if (baskets[k,i] * baskets[k,j]) == 1:
+                count += 1
+            if count >= s_threshold:
+                total_count += 1
+                count = 0
+    return total_count
+
 # Part c
 def sum_bucket_size():
     baskets = generate_baskets_matrix(100)
@@ -38,5 +58,6 @@ def sum_bucket_size():
     # Sum the sums to get total size
     return int(basket_sizes.sum())
 
-print freq_items()
-print sum_bucket_size()
+print "frequent items: ", freq_items()
+print "frequent pairs: ", freq_pairs()
+print "Sum of bucket size: ", sum_bucket_size()
