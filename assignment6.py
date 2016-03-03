@@ -58,6 +58,18 @@ def sum_bucket_size():
     # Sum the sums to get total size
     return int(basket_sizes.sum())
 
+## Exercise 6.1.2
+# Not needed for homework
+def max_basket():
+    baskets = generate_baskets_matrix(100)
+    # Sum the rows for the basket length
+    basket_lengths = baskets.sum(axis=1)
+    return int(basket_lengths.max())
+
+print "6.1.1"
 print "frequent items: ", freq_items()
 print "frequent pairs: ", freq_pairs()
 print "Sum of bucket size: ", sum_bucket_size()
+
+print "6.1.2"
+print "Max bucket size: ", max_basket()
