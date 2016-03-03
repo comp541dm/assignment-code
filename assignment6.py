@@ -23,9 +23,7 @@ def generate_baskets_matrix(n=100):
     return baskets_matrix
 
 # Part a
-def freq_items(s_threshold = 5):
-    # Generates the basket matrix
-    baskets = generate_baskets_matrix(100)
+def freq_items(baskets, s_threshold = 5):
     # Sums down the columns to get the count of each item in baskets
     summed_baskets = baskets.sum(axis=0)
     # Return the number of baskets over the threshold
@@ -34,9 +32,8 @@ def freq_items(s_threshold = 5):
 # Part b
 #
 # Brute force method
-def freq_pairs(s_threshold = 5):
+def freq_pairs(baskets, s_threshold = 5):
     n = 100
-    baskets = generate_baskets_matrix(n)
     # Generate pairs of combinations
     results = []
     total_count = 0
@@ -51,8 +48,7 @@ def freq_pairs(s_threshold = 5):
     return total_count
 
 # Part c
-def sum_bucket_size():
-    baskets = generate_baskets_matrix(100)
+def sum_bucket_size(baskets):
     # Sum the rows to get the size of each bucket
     basket_sizes = baskets.sum(axis=1)
     # Sum the sums to get total size
@@ -60,16 +56,16 @@ def sum_bucket_size():
 
 ## Exercise 6.1.2
 # Not needed for homework
-def max_basket():
-    baskets = generate_baskets_matrix(100)
+def max_basket(baskets):
     # Sum the rows for the basket length
     basket_lengths = baskets.sum(axis=1)
     return int(basket_lengths.max())
 
 print "6.1.1"
-print "frequent items: ", freq_items()
-print "frequent pairs: ", freq_pairs()
-print "Sum of bucket size: ", sum_bucket_size()
+baskets = generate_baskets_matrix(100)
+print "frequent items: ", freq_items(baskets)
+print "frequent pairs: ", freq_pairs(baskets)
+print "Sum of bucket size: ", sum_bucket_size(baskets)
 
 print "6.1.2"
-print "Max bucket size: ", max_basket()
+print "Max bucket size: ", max_basket(baskets)
