@@ -22,6 +22,19 @@ def generate_baskets_matrix(n=100):
                 baskets_matrix[bucket_i - 1, item_i - 1] = 1
     return baskets_matrix
 
+def generate_alt_baskets_matrix(n=100):
+    # Makes an n x n matrix and uses 1 to represent in the bucket
+    # Rows are buckets, and columns are items
+    baskets_matrix = np.zeros((n,n))
+    for bucket_i in range(1, n + 1):
+        # Since item will only divide bucket if item_i > bucket_i
+        for item_i in range(bucket_i, n + 1):
+            # Item i is in basket b if and only if
+            # b divides i with no remainder.
+            if item_i % bucket_i == 0:
+                baskets_matrix[bucket_i - 1, item_i - 1] = 1
+    return baskets_matrix
+
 # Part a
 def freq_items(baskets, s_threshold = 5):
     # Sums down the columns to get the count of each item in baskets
@@ -69,3 +82,9 @@ print "Sum of bucket size: ", sum_bucket_size(baskets)
 
 print "6.1.2"
 print "Max bucket size: ", max_basket(baskets)
+
+print "6.1.3"
+alt_baskets = generate_alt_baskets_matrix(100)
+print "frequent items: ", freq_items(alt_baskets)
+print "frequent pairs: ", freq_pairs(alt_baskets)
+print "Sum of bucket size: ", sum_bucket_size(alt_baskets)
