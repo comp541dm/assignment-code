@@ -12,6 +12,16 @@ def generate_baskets(n=100):
         all_buckets.append(curr_bucket)
     return all_buckets
 
+def generate_alt_baskets(n=100):
+    all_buckets = []
+    for bucket_i in range(1, n + 1):
+        curr_bucket = []
+        for item_i in range(bucket_i, n + 1):
+            if item_i % bucket_i == 0:
+                curr_bucket.append(item_i)
+        all_buckets.append(curr_bucket)
+    return all_buckets
+
 def generate_baskets_matrix(n=100):
     # Makes an n x n matrix and uses 1 to represent in the bucket
     # Rows are buckets, and columns are items
@@ -94,17 +104,27 @@ baskets_m = generate_baskets_matrix(100)
 print "frequent items: ", freq_items(baskets_m)
 print "frequent pairs: ", freq_pairs(baskets_m)
 print "Sum of bucket size: ", sum_bucket_size(baskets_m)
+print ""
 
 print "Exercise: 6.1.2"
 print "Max bucket size: ", max_basket(baskets_m)
+print ""
 
 print "Exercise: 6.1.3"
-alt_baskets = generate_alt_baskets_matrix(100)
-print "frequent items: ", freq_items(alt_baskets)
-print "frequent pairs: ", freq_pairs(alt_baskets)
-print "Sum of bucket size: ", sum_bucket_size(alt_baskets)
+alt_baskets_m = generate_alt_baskets_matrix(100)
+print "frequent items: ", freq_items(alt_baskets_m)
+print "frequent pairs: ", freq_pairs(alt_baskets_m)
+print "Sum of bucket size: ", sum_bucket_size(alt_baskets_m)
+print ""
 
 print "Exercise: 6.1.5"
 baskets = generate_baskets(100)
-print "Confidence -  {5,7} -> 2:", confidence(baskets, [5,7], 2)
-print "Confidence - {2,3,4} -> 5:", confidence(baskets, [2,3,4], 5)
+print "Confidence -  {5, 7} -> 2:", confidence(baskets, [5,7], 2)
+print "Confidence - {2, 3, 4} -> 5:", confidence(baskets, [2,3,4], 5)
+print ""
+
+print "Exercise: 6.1.6"
+alt_baskets = generate_alt_baskets(100)
+print "Confidence -  {24, 60} -> 8:", confidence(alt_baskets, [24,60], 8)
+print "Confidence -  {2, 3, 4} -> 5:", confidence(alt_baskets, [2,3,4], 5)
+print ""
