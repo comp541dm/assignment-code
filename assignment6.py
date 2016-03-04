@@ -74,17 +74,37 @@ def max_basket(baskets):
     basket_lengths = baskets.sum(axis=1)
     return int(basket_lengths.max())
 
-print "6.1.1"
-baskets = generate_baskets_matrix(100)
-print "frequent items: ", freq_items(baskets)
-print "frequent pairs: ", freq_pairs(baskets)
-print "Sum of bucket size: ", sum_bucket_size(baskets)
+# Get support for baskets in non-matrix form
+def support(baskets, items):
+    count = 0
+    set_items = set(items)
+    n = len(set_items)
+    for b in baskets:
+        set_b = set(b)
+        intersect = set_items.intersection(set_b)
+        if len(intersect) >= n:
+            count += 1
+    return count
 
-print "6.1.2"
-print "Max bucket size: ", max_basket(baskets)
+def confidence(baskets, items, j):
+    return support(baskets, items + [j]) / float(support(baskets, items))
 
-print "6.1.3"
+print "Exercise: 6.1.1"
+baskets_m = generate_baskets_matrix(100)
+print "frequent items: ", freq_items(baskets_m)
+print "frequent pairs: ", freq_pairs(baskets_m)
+print "Sum of bucket size: ", sum_bucket_size(baskets_m)
+
+print "Exercise: 6.1.2"
+print "Max bucket size: ", max_basket(baskets_m)
+
+print "Exercise: 6.1.3"
 alt_baskets = generate_alt_baskets_matrix(100)
 print "frequent items: ", freq_items(alt_baskets)
 print "frequent pairs: ", freq_pairs(alt_baskets)
 print "Sum of bucket size: ", sum_bucket_size(alt_baskets)
+
+print "Exercise: 6.1.5"
+baskets = generate_baskets(100)
+print "Confidence -  {5,7} -> 2:", confidence(baskets, [5,7], 2)
+print "Confidence - {2,3,4} -> 5:", confidence(baskets, [2,3,4], 5)
